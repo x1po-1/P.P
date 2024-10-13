@@ -3,97 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Biography of artist D1TRK, an electronic music producer and digital creator.">
-    <link rel="icon" href="https://miro.medium.com/v2/resize:fit:721/1*UHxOAqNyExCgmZTi9-p7DQ.jpeg" type="image/jpeg">
-    <title>Biography of D1TRK</title>
+    <title>P.P</title>
+    <link rel="icon" type="image/x-icon" href="https://blogger.googleusercontent.com/img/a/AVvXsEhIJRvzfs3qj7pvpvLAhLeQAKZSStTBgKJubJP7qyuWMAW_0l344sb-VxWcVTFAF9hlPLh99KT13QwKZaWUD0UIIBceTojP3cBnmfOhHibbaW8UWSqPFOhWZlqG2dWP7xZ5ZCwcadFX5jdxR--F0jtwkplANT6Nzfr5jAMz3Dctuwtm0keOINAVRovGk3wP">
+    <meta name="description" content="Download music, movies, games, software and much more. The Pirate Bay is the galaxy's most resilient BitTorrent site.">
+    <meta name="keywords" content="mp3, avi, bittorrent, torrent, torrents, movies, music, games, applications, apps, download, upload, share, kopimi, magnets, magnet">
+    <link href="/static/normalize.css" rel="stylesheet" type="text/css">
+    <link href="/static/tpb.css" rel="stylesheet" type="text/css">
+    <script src="/static/main.js"></script>
     <style>
-                body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
+        body {
+            font: 0.8em/1.5em Verdana, Arial, Helvetica, sans-serif;
             text-align: center;
+            margin: 0;
         }
-        .content {
-            max-width: 800px;
+        h4 {
+            margin: 0;
+        }
+        header, footer {
+            background-color: #f6f1ee;
+            padding: 10px;
+        }
+        main {
+            display: block;
             margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            margin-bottom: 20px;
+            max-width: 1200px;
         }
         a {
-            color: #007BFF;
+            color: #009;
+            text-decoration: none;
+            border-bottom: 1px dotted #000;
         }
-        iframe {
-            width: 100%;
-            height: 400px;
+        a:hover {
+            border-bottom: 1px solid #009;
+        }
+        input[type="search"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            color: #fff;
+            background-color: #ff0000;
             border: none;
-            margin-top: 20px;
+            cursor: pointer;
         }
-        footer {
-            text-align: center;
+        button:hover {
+            background-color: #cc0000;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        #categories {
             margin-top: 20px;
-            color: #777;
+            text-align: left;
         }
     </style>
+    <script>
+        async function getCategories() {
+            const url = 'https://thepiratebayvolodimir-kudriachenkoV1.p.rapidapi.com/getCategories';
+            const options = {
+                method: 'POST',
+                headers: {
+                    'X-Rapidapi-Key': 'c1ea5f4abbmsh49d36528a784789p1f6a5cjsnb6a7ec053e8a',
+                    'X-Rapidapi-Host': 'ThePirateBayvolodimir-kudriachenkoV1.p.rapidapi.com',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            };
+
+            try {
+                const response = await fetch(url, options);
+                const data = await response.json();
+                displayCategories(data);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        }
+
+        function displayCategories(categories) {
+            const categoriesDiv = document.getElementById('categories');
+            categoriesDiv.innerHTML = '<h4>Categories</h4>';
+
+            if (categories && categories.length > 0) {
+                const list = document.createElement('ul');
+                categories.forEach(category => {
+                    const item = document.createElement('li');
+                    item.textContent = category.name; // Assuming the API returns category objects with a 'name' property
+                    list.appendChild(item);
+                });
+                categoriesDiv.appendChild(list);
+            } else {
+                categoriesDiv.innerHTML += '<p>No categories found.</p>';
+            }
+        }
+
+        window.onload = () => {
+            getCategories();
+        };
+    </script>
 </head>
-<body>
+<body id="home">
     <header>
-        <h1>D1TRK - Artist Biography</h1>
+        <h4><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhIJRvzfs3qj7pvpvLAhLeQAKZSStTBgKJubJP7qyuWMAW_0l344sb-VxWcVTFAF9hlPLh99KT13QwKZaWUD0UIIBceTojP3cBnmfOhHibbaW8UWSqPFOhWZlqG2dWP7xZ5ZCwcadFX5jdxR--F0jtwkplANT6Nzfr5jAMz3Dctuwtm0keOINAVRovGk3wP" alt="Logo" width="500" height="319"></h4>
+        <nav>
+            <strong>Search Torrents</strong> | 
+            <a href="https://thepiratebay3.co./browse.php">Browse Torrents</a> | 
+            <a href="https://thepiratebay3.co/search.php?q=top100:recent">Recent Torrents</a> | 
+            <a href="https://thepiratebay3.co/top.php">Top 100</a>
+        </nav>
     </header>
-
-    <div class="content">
-        <h2>About D1TRK</h2>
-        <p>
-            D1TRK is an electronic music producer, content creator, and digital artist. Known for their innovative beats and unique soundscapes, D1TRK has been steadily building a following on platforms such as <a href="https://d1trk.blogspot.com/">Blogger</a>, <a href="https://medium.com/@dtrkdj/d1trk-bff0f861a12c">Medium</a>, and their social media channels. With more than 20 tracks uploaded on YouTube, D1TRK continues to evolve their craft, producing music that blends elements of electronic, house, and ambient genres.
-        </p>
-
-        <h2>Musical Journey</h2>
-        <p>
-            Starting from humble beginnings, D1TRK has overcome various challenges in their artistic career. Despite limited early engagement, their perseverance in pushing out creative projects has garnered respect from peers in the digital music scene. D1TRK's focus remains on creating authentic music and building a dedicated fanbase over time.
-        </p>
-
-        <h2>Projects and Releases</h2>
-        <p>
-            As an artist, D1TRK has produced over 20 tracks, each showcasing a blend of experimental sounds and melodic progression. Their works can be found on their official YouTube channel: 
-            <a href="https://www.youtube.com/@d1trk" target="_blank">D1TRK's YouTube Channel</a>, 
-            where they continuously experiment with new styles. D1TRK's passion for music also extends to writing, sharing insights and creative thoughts on platforms like <a href="https://medium.com/@dtrkdj/d1trk-bff0f861a12c">Medium</a>.
-        </p>
-
-        <h2>Location</h2>
-        <p>
-            You can explore D1TRK's location through Google Maps by following this link:
-            <a href="https://maps.app.goo.gl/NSCgGx5Sa2EAUAmZ8" target="_blank">D1TRK Location on Google Maps</a>.
-        </p>
-
-        <h2>Connect with D1TRK</h2>
-        <p>
-            D1TRK's work can be followed across multiple platforms:
-        </p>
-        <ul>
-            <li><a href="https://d1trk.blogspot.com/">Blogger</a></li>
-            <li><a href="https://medium.com/@dtrkdj/d1trk-bff0f861a12c">Medium</a></li>
-            <li><a href="https://www.google.com/search?q=d1trk">Google Search</a></li>
-            <li><a href="https://www.youtube.com/@d1trk" target="_blank">YouTube</a></li>
-        </ul>
-    </div>
-
+    <main>
+        <section>
+            <form name="q" method="get" action="https://thepiratebay10.info/s/">
+                <input type="search" name="q" placeholder="Pirate Search" autofocus required maxlength="256">
+                <p>
+                    <button type="submit">Search</button>
+                </p>
+                <p><img src='https://thepiratebay10.info/static/img/in.gif' height='40' width='60' alt=''> NOT download any torrent before hiding your IP with a VPN</p>
+                <p>2019-2024</p>
+            </form>
+        </section>
+        <section id="categories"></section>
+        <section>
+            <h4>Advertisements</h4>
+            <a href='https://www.paidwork.com/?lang=en-us' target='_blank'><img src='https://pirate-place.github.io/Pirate-Place/Untitled.gif' height='110' width='510' alt='Get paid wherever you are, without investment.'></a>
+            <a href='https://accounts.binance.com/' target='_blank'><img src='https://pirate-place.github.io/Pirate-Place/1710328781_jjl0Sa8O.png' height='110' width='510' alt='Advanced Crypto Stealer - Clipboard Address Changer'></a>
+            <a href='https://tgp1.brazzersnetwork.com/joinf?ad_id=819919_FREE' target='_blank'><img src='https://el.phncdn.com/gif/49763991.gif' height='110' width='510' alt='FREE IS BACK'></a>
+            <a href='https://www.tindie.com/stores/theoldnet/' target='_blank'><img src='https://theoldnet.com/images/banner-ad3.jpg' height='110' width='510' alt=''></a>
+            <a href='https://watchpeopledie.tv/' target='_blank'><img src='https://s1.gifyu.com/images/SBFie.gif' height='110' width='510' alt=''></a>
+            <a href='https://videos.watchpeopledie.tv/16688027057073228.mp4' target='_blank'><img src='https://watchpeopledie.tv/e/marseyupset.webp' height='110' width='510' alt=''></a>
+        </section>
+    </main>
     <footer>
-        <p>© 2024 D1TRK. All Rights Reserved.</p>
     </footer>
-
 </body>
 </html>
