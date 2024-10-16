@@ -59,49 +59,54 @@
             text-align: left;
         }
     </style>
-    <script>
-        async function getCategories() {
-            const url = 'https://thepiratebayvolodimir-kudriachenkoV1.p.rapidapi.com/getCategories';
-            const options = {
-                method: 'POST',
-                headers: {
-                    'X-Rapidapi-Key': 'c1ea5f4abbmsh49d36528a784789p1f6a5cjsnb6a7ec053e8a',
-                    'X-Rapidapi-Host': 'ThePirateBayvolodimir-kudriachenkoV1.p.rapidapi.com',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({})
-            };
 
-            try {
-                const response = await fetch(url, options);
-                const data = await response.json();
-                displayCategories(data);
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-            }
-        }
+<script>
+    const apiEndpoint = 'https://thepiratebayvolodimir-kudriachenkoV1.p.rapidapi.com/getCategories';
 
-        function displayCategories(categories) {
-            const categoriesDiv = document.getElementById('categories');
-            categoriesDiv.innerHTML = '<h4>Categories</h4>';
-
-            if (categories && categories.length > 0) {
-                const list = document.createElement('ul');
-                categories.forEach(category => {
-                    const item = document.createElement('li');
-                    item.textContent = category.name; // Assuming the API returns category objects with a 'name' property
-                    list.appendChild(item);
-                });
-                categoriesDiv.appendChild(list);
-            } else {
-                categoriesDiv.innerHTML += '<p>No categories found.</p>';
-            }
-        }
-
-        window.onload = () => {
-            getCategories();
+    async function getCategories() {
+        const options = {
+            method: 'POST',
+            headers: {
+                'X-Rapidapi-Key': 'c1ea5f4abbmsh49d36528a784789p1f6a5cjsnb6a7ec053e8a',
+                'X-Rapidapi-Host': 'ThePirateBayvolodimir-kudriachenkoV1.p.rapidapi.com',
+                'Content-Type': 'application/json',
+                'Host': 'thepiratebayvolodimir-kudriachenkov1.p.rapidapi.com'
+            },
+            body: JSON.stringify({})  // Empty JSON payload
         };
-    </script>
+
+        try {
+            const response = await fetch(apiEndpoint, options);
+            const data = await response.json();
+            displayCategories(data);
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    }
+
+    function displayCategories(categories) {
+        const categoriesDiv = document.getElementById('categories');
+        categoriesDiv.innerHTML = '<h4>Categories</h4>';
+
+        if (categories && categories.length > 0) {
+            const list = document.createElement('ul');
+            categories.forEach(category => {
+                const item = document.createElement('li');
+                item.textContent = category.name;  // Assuming the API returns 'name' property
+                list.appendChild(item);
+            });
+            categoriesDiv.appendChild(list);
+        } else {
+            categoriesDiv.innerHTML += '<p>No categories found.</p>';
+        }
+    }
+
+    window.onload = () => {
+        getCategories();
+    };
+</script>
+
+
 </head>
 <body id="home">
     <header>
@@ -124,6 +129,7 @@
                 <p>2019-2024</p>
             </form>
         </section>
+        <section id="exit-nodes"></section>
         <section id="categories"></section>
         <section>
             <h4>Advertisements</h4>
@@ -139,3 +145,4 @@
     </footer>
 </body>
 </html>
+
