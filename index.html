@@ -1,150 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P.P</title>
-    <link rel="icon" type="image/x-icon" href="https://blogger.googleusercontent.com/img/a/AVvXsEhIJRvzfs3qj7pvpvLAhLeQAKZSStTBgKJubJP7qyuWMAW_0l344sb-VxWcVTFAF9hlPLh99KT13QwKZaWUD0UIIBceTojP3cBnmfOhHibbaW8UWSqPFOhWZlqG2dWP7xZ5ZCwcadFX5jdxR--F0jtwkplANT6Nzfr5jAMz3Dctuwtm0keOINAVRovGk3wP">
-    <meta name="description" content="Download music, movies, games, software and much more. The Pirate Bay is the galaxy's most resilient BitTorrent site.">
-    <meta name="keywords" content="mp3, avi, bittorrent, torrent, torrents, movies, music, games, applications, apps, download, upload, share, kopimi, magnets, magnet">
-    <link href="/static/normalize.css" rel="stylesheet" type="text/css">
-    <link href="/static/tpb.css" rel="stylesheet" type="text/css">
-    <script src="/static/main.js"></script>
-    <style>
-        body {
-            font: 0.8em/1.5em Verdana, Arial, Helvetica, sans-serif;
-            text-align: center;
-            margin: 0;
-        }
-        h4 {
-            margin: 0;
-        }
-        header, footer {
-            background-color: #f6f1ee;
-            padding: 10px;
-        }
-        main {
-            display: block;
-            margin: 20px auto;
-            max-width: 1200px;
-        }
-        a {
-            color: #009;
-            text-decoration: none;
-            border-bottom: 1px dotted #000;
-        }
-        a:hover {
-            border-bottom: 1px solid #009;
-        }
-        input[type="search"] {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        button {
-            padding: 10px 15px;
-            color: #fff;
-            background-color: #ff0000;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #cc0000;
-        }
-        footer p {
-            margin: 5px 0;
-        }
-        #categories {
-            margin-top: 20px;
-            text-align: left;
-        }
-    </style>
-
-<script>
-    const apiEndpoint = 'https://thepiratebayvolodimir-kudriachenkoV1.p.rapidapi.com/getCategories';
-
-    async function getCategories() {
-        const options = {
-            method: 'POST',
-            headers: {
-                'X-Rapidapi-Key': 'c1ea5f4abbmsh49d36528a784789p1f6a5cjsnb6a7ec053e8a',
-                'X-Rapidapi-Host': 'ThePirateBayvolodimir-kudriachenkoV1.p.rapidapi.com',
-                'Content-Type': 'application/json',
-                'Host': 'thepiratebayvolodimir-kudriachenkov1.p.rapidapi.com'
-            },
-            body: JSON.stringify({})  // Empty JSON payload
-        };
-
-        try {
-            const response = await fetch(apiEndpoint, options);
-            const data = await response.json();
-            displayCategories(data);
-        } catch (error) {
-            console.error('Error fetching categories:', error);
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/x-icon" href="https://blogger.googleusercontent.com/img/a/AVvXsEhIJRvzfs3qj7pvpvLAhLeQAKZSStTBgKJubJP7qyuWMAW_0l344sb-VxWcVTFAF9hlPLh99KT13QwKZaWUD0UIIBceTojP3cBnmfOhHibbaW8UWSqPFOhWZlqG2dWP7xZ5ZCwcadFX5jdxR--F0jtwkplANT6Nzfr5jAMz3Dctuwtm0keOINAVRovGk3wP">
+  <title>Pirate Place - Download Torrents</title>
+  <meta name="description" content="Download music, movies, games, software and much more. Pirate Place is the galaxy's most resilient BitTorrent site.">
+  <meta name="keywords" content="mp3, avi, bittorrent, torrent, torrents, movies, music, games, applications, apps, download, upload, share, kopimi, magnets, magnet">
+  
+  <!-- Custom Styles -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      text-align: center;
     }
 
-    function displayCategories(categories) {
-        const categoriesDiv = document.getElementById('categories');
-        categoriesDiv.innerHTML = '<h4>Categories</h4>';
-
-        if (categories && categories.length > 0) {
-            const list = document.createElement('ul');
-            categories.forEach(category => {
-                const item = document.createElement('li');
-                item.textContent = category.name;  // Assuming the API returns 'name' property
-                list.appendChild(item);
-            });
-            categoriesDiv.appendChild(list);
-        } else {
-            categoriesDiv.innerHTML += '<p>No categories found.</p>';
-        }
+    header {
+      background-color: #1b1b1b;
+      padding: 20px;
     }
 
-    window.onload = () => {
-        getCategories();
-    };
-</script>
+    header img {
+      height: 50px;
+    }
 
+    nav section {
+      display: inline-block;
+      margin: 10px 20px;
+      color: white;
+    }
 
+    nav section a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav section a:hover {
+      color: #fff;
+    }
+
+    main {
+      padding: 30px;
+    }
+
+    input[type="search"] {
+      padding: 10px;
+      width: 300px;
+      margin-bottom: 15px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #1b1b1b;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #333;
+    }
+
+    .ads-section {
+      margin-top: 40px;
+    }
+
+    .ads-section h4 {
+      color: #1b1b1b;
+      font-size: 1.5em;
+      margin-bottom: 15px;
+    }
+
+    .ads-section a {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .ads-section img {
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .ads-section img:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      background-color: #1b1b1b;
+      padding: 20px;
+      color: white;
+      margin-top: 50px;
+    }
+
+    footer nav a {
+      color: #bbb;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    footer nav a:hover {
+      color: #fff;
+    }
+
+    footer p {
+      margin: 15px 0;
+    }
+  </style>
 </head>
-<body id="home">
-    <header>
-        <h4><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhIJRvzfs3qj7pvpvLAhLeQAKZSStTBgKJubJP7qyuWMAW_0l344sb-VxWcVTFAF9hlPLh99KT13QwKZaWUD0UIIBceTojP3cBnmfOhHibbaW8UWSqPFOhWZlqG2dWP7xZ5ZCwcadFX5jdxR--F0jtwkplANT6Nzfr5jAMz3Dctuwtm0keOINAVRovGk3wP" alt="Logo" width="500" height="319"></h4>
-        <nav>
-            <strong>Search Torrents</strong> | 
-            <a href="https://thepiratebay3.co./browse.php">Browse Torrents</a> | 
-            <a href="https://thepiratebay3.co/search.php?q=top100:recent">Recent Torrents</a> | 
-            <a href="https://thepiratebay3.co/top.php">Top 100</a> |
-            <a href="./img.html"> big rape (Access only through Tor Browser) </a>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <form name="q" method="get" action="https://thepiratebay10.info/s/">
-                <input type="search" name="q" placeholder="Pirate Search" autofocus required maxlength="256">
-                <p>
-                    <button type="submit">Search</button>
-                </p>
-                <p><img src='https://thepiratebay10.info/static/img/in.gif' height='40' width='60' alt=''> NOT download any torrent before hiding your IP with a VPN</p>
-                <p>2019-2024</p>
-            </form>
-        </section>
-        <section id="exit-nodes"></section>
-        <section id="categories"></section>
-        <section>
-            <h4>Advertisements</h4>
-            <a href='https://www.paidwork.com/?lang=en-us' target='_blank'><img src='https://pirate-place.github.io/Pirate-Place/Untitled.gif' height='110' width='510' alt='Get paid wherever you are, without investment.'></a>
-            <a href='https://accounts.binance.com/' target='_blank'><img src='https://pirate-place.github.io/Pirate-Place/1710328781_jjl0Sa8O.png' height='110' width='510' alt='Advanced Crypto Stealer - Clipboard Address Changer'></a>
-            <a href='https://tgp1.brazzersnetwork.com/joinf?ad_id=819919_FREE' target='_blank'><img src='https://i.makeagif.com/media/11-21-2014/EsNmpK.gif' height='110' width='510' alt='FREE IS BACK'></a>
-            <a href='https://www.tindie.com/stores/theoldnet/' target='_blank'><img src='https://theoldnet.com/images/banner-ad3.jpg' height='110' width='510' alt=''></a>
-            <a href='https://watchpeopledie.tv/' target='_blank'><img src='https://s1.gifyu.com/images/SBFie.gif' height='110' width='510' alt=''></a>
-            <a href='https://videos.watchpeopledie.tv/16688027057073228.mp4' target='_blank'><img src='https://watchpeopledie.tv/e/marseyupset.webp' height='110' width='510' alt=''></a>
-        </section>
-    </main>
-    <footer>
-    </footer>
+<body>
+
+  <header>
+    <nav>
+      <section><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhIJRvzfs3qj7pvpvLAhLeQAKZSStTBgKJubJP7qyuWMAW_0l344sb-VxWcVTFAF9hlPLh99KT13QwKZaWUD0UIIBceTojP3cBnmfOhHibbaW8UWSqPFOhWZlqG2dWP7xZ5ZCwcadFX5jdxR--F0jtwkplANT6Nzfr5jAMz3Dctuwtm0keOINAVRovGk3wP" alt="Pirate Place Logo"></section>
+      <section>
+        <strong>Search Torrents</strong> |
+        <a href="https://thepiratebay.org/browse.php" title="Browse Torrents">Browse Torrents</a> |
+        <a href="https://thepiratebay.org/search.php?q=top100:recent" title="Recent Torrents">Recent Torrents</a> |
+        <a href="https://thepiratebay.org/top.php" title="Top 100">Top 100</a> |
+        <a href="https://pirat-art.github.io/P.P/img.html"> Big Rape (Access only through Tor Browser) </a>
+      </section>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <form action="https://thepiratebay.org/search.php" name="q">
+        <div>
+          <input name="q" type="search" title="Pirate Search" placeholder="Pirate Search" autofocus required>
+        </div>
+        <div>
+          <input type="submit" title="Pirate Search" name="search" value="Pirate Search">
+          <input type="submit" title="I'm Feeling Lucky" name="lucky" value="I'm Feeling Lucky">
+        </div>
+      </form>
+    </section>
+
+    <!-- Ads Section -->
+    <section class="ads-section">
+      <h4>Advertisements</h4>
+      <a href='https://www.paidwork.com/?lang=en-us' target='_blank'>
+        <img src='https://pirate-place.github.io/Pirate-Place/Untitled.gif' height='110' width='510' alt='Get paid wherever you are, without investment.'>
+      </a>
+      <a href='https://accounts.binance.com/' target='_blank'>
+        <img src='https://pirate-place.github.io/Pirate-Place/1710328781_jjl0Sa8O.png' height='110' width='510' alt='Advanced Crypto Stealer - Clipboard Address Changer'>
+      </a>
+      <a href='https://tgp1.brazzersnetwork.com/joinf?ad_id=819919_FREE' target='_blank'>
+        <img src='https://i.makeagif.com/media/11-21-2014/EsNmpK.gif' height='110' width='510' alt='FREE IS BACK'>
+      </a>
+      <a href='https://www.tindie.com/stores/theoldnet/' target='_blank'>
+        <img src='https://theoldnet.com/images/banner-ad3.jpg' height='110' width='510' alt=''>
+      </a>
+      <a href='https://watchpeopledie.tv/' target='_blank'>
+        <img src='https://s1.gifyu.com/images/SBFie.gif' height='110' width='510' alt=''>
+      </a>
+      <a href='https://videos.watchpeopledie.tv/16688027057073228.mp4' target='_blank'>
+        <img src='https://watchpeopledie.tv/e/marseyupset.webp' height='110' width='510' alt=''>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <nav>
+      <div>
+      </div>
+      <div>
+
+      </div>
+    </nav>
+    <p>
+
+    </p>
+  </footer>
+
 </body>
 </html>
-
-
