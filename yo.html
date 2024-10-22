@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search in wiki</title>
+    <!-- Add favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/wB67RZY/Mark-of-the-United-States-Army-svg.png">
+    
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #E7ECF2;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h2 {
+            color: #2E5C94;
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #7F9DB9;
+            border-radius: 2px;
+            box-shadow: inset 1px 1px 2px #BECBD6;
+            width: 100%;
+            max-width: 400px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            border: 1px solid #8A9EBE;
+            background-color: #F4F4F4;
+            background: linear-gradient(to bottom, #F8F8F8 0%, #E7E9EC 100%);
+            border-radius: 3px;
+            font-family: Tahoma, sans-serif;
+            font-size: 1rem;
+            color: #333;
+            box-shadow: 1px 1px 3px #BECBD6;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+        button:hover {
+            background-color: #E4E7EA;
+        }
+        button:active {
+            background-color: #D1D4D9;
+            box-shadow: inset 2px 2px 5px #8C98A6;
+        }
+        .results {
+            margin-top: 20px;
+            font-size: 1rem;
+            border: 1px solid #8A9EBE;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #F9F9F9;
+            word-wrap: break-word;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.75rem;
+            }
+            button, input[type="text"] {
+                font-size: 0.9rem;
+            }
+            .results {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+            button, input[type="text"] {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+            .results {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Add the logo image -->
+    <img src="https://i.ibb.co/wB67RZY/Mark-of-the-United-States-Army-svg.png" alt="Logo" class="logo">
+    
+    <h2>Search in wiki</h2>
+    <input type="text" id="searchTerm" placeholder="Enter search term" />
+    <button onclick="searchInFile()">Search</button>
+
+    <div class="results" id="results"></div>
+
+    <script>
+        function searchInFile() {
+            const searchTerm = document.getElementById('searchTerm').value.toLowerCase();
+            const fileUrl = './your-file.html'; // Replace with your file URL
+
+            fetch(fileUrl)
+                .then(response => response.text())
+                .then(data => {
+                    const resultsContainer = document.getElementById('results');
+                    const lines = data.split('\n');
+                    let results = '';
+
+                    lines.forEach((line, index) => {
+                        if (line.toLowerCase().includes(searchTerm)) {
+                            results += `<p>Line ${index + 1}: ${line}</p>`;
+                        }
+                    });
+
+                    if (results) {
+                        resultsContainer.innerHTML = `<strong>Search Results:</strong> ${results}`;
+                    } else {
+                        resultsContainer.innerHTML = '<p>No results found.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching the file:', error);
+                });
+        }
+    </script>
+
+</body>
+</html>
